@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кедровые бани-бочки от производителя — Кедр Премиум</title>
+    
+    <link rel="preload" as="image" href="img/hero-bg.webp">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .bg-wood { background-image: url('img/hero-bg.jpg'); background-size: cover; background-position: center; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-stone-50 text-stone-900">
 
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200">
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200">
         <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
             <div class="flex flex-col">
                 <span class="text-xl font-extrabold text-green-800 tracking-tight uppercase">Кедр Премиум</span>
@@ -38,22 +38,22 @@
         <div class="absolute inset-0 bg-wood scale-105"></div>
         
         <div class="relative z-20 max-w-4xl px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                Кедровые бани-бочки <br> <span class="text-green-400 text-shadow-lg">с установкой за 1 день</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-shadow-lg">
+                Кедровые бани-бочки <br> <span class="text-green-400">с установкой за 1 день</span>
             </h1>
-            <p class="text-lg md:text-xl mb-10 text-stone-200 font-medium">
+            <p class="text-lg md:text-xl mb-10 text-stone-200 font-medium text-shadow-md">
                 Получите готовую баню с гарантией 12 месяцев по договору. <br>
                 Первая протопка в день доставки!
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#quiz" class="w-full sm:w-auto px-8 py-5 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold text-lg shadow-xl shadow-green-900/20 transition-all transform hover:-translate-y-1">
+                <a href="#quiz" class="w-full sm:w-auto px-8 py-5 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold text-lg shadow-xl shadow-green-900/30 transition-all transform hover:-translate-y-1">
                     Рассчитать стоимость бани
                 </a>
-                <div class="flex items-center space-x-2 text-sm">
+                <div class="flex items-center justify-center space-x-2 text-sm mt-4 sm:mt-0">
                     <span class="flex -space-x-2">
-                        <img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=1" alt="">
-                        <img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=2" alt="">
-                        <img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=3" alt="">
+                        <img class="w-8 h-8 rounded-full border-2 border-stone-800" src="https://i.pravatar.cc/100?img=11" alt="avatar">
+                        <img class="w-8 h-8 rounded-full border-2 border-stone-800" src="https://i.pravatar.cc/100?img=12" alt="avatar">
+                        <img class="w-8 h-8 rounded-full border-2 border-stone-800" src="https://i.pravatar.cc/100?img=33" alt="avatar">
                     </span>
                     <span class="text-stone-300">уже 457 довольных владельцев</span>
                 </div>
@@ -61,9 +61,9 @@
         </div>
     </header>
 
-    <section id="quiz" class="py-24 bg-white">
+    <section id="quiz" class="py-24 bg-white scroll-mt-20">
         <div class="max-w-3xl mx-auto px-4">
-            <div class="bg-stone-50 rounded-3xl p-8 md:p-12 shadow-2xl border border-stone-100">
+            <div class="bg-stone-50 rounded-3xl p-8 md:p-12 shadow-2xl border border-stone-100 relative overflow-hidden">
                 <div class="mb-8">
                     <span class="text-green-600 font-bold uppercase tracking-widest text-xs">Квиз-опросник</span>
                     <h2 class="text-3xl font-bold mt-2">Узнайте стоимость вашей бани</h2>
@@ -76,20 +76,20 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <label class="cursor-pointer group">
                                 <input type="radio" name="form" class="hidden peer">
-                                <div class="p-4 border-2 border-stone-200 rounded-xl group-hover:border-green-500 peer-checked:border-green-600 peer-checked:bg-green-50 transition-all">
+                                <div class="quiz-card p-4 border-2 border-stone-200 rounded-xl group-hover:border-green-500 peer-checked:border-green-600 peer-checked:bg-green-50">
                                     <span class="font-bold block uppercase tracking-tight">Круглая</span>
                                     <span class="text-xs text-stone-500 leading-none">Классический уют</span>
                                 </div>
                             </label>
                             <label class="cursor-pointer group">
                                 <input type="radio" name="form" class="hidden peer">
-                                <div class="p-4 border-2 border-stone-200 rounded-xl group-hover:border-green-500 peer-checked:border-green-600 peer-checked:bg-green-50 transition-all">
+                                <div class="quiz-card p-4 border-2 border-stone-200 rounded-xl group-hover:border-green-500 peer-checked:border-green-600 peer-checked:bg-green-50">
                                     <span class="font-bold block uppercase tracking-tight">Квадро</span>
                                     <span class="text-xs text-stone-500 leading-none">Больше пространства внутри</span>
                                 </div>
                             </label>
                         </div>
-                        <button class="mt-8 w-full py-4 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Следующий шаг →</button>
+                        <button class="mt-8 w-full py-4 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold transition-colors">Следующий шаг →</button>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-center md:text-left">
             <div>
                 <p class="text-white font-bold uppercase tracking-tighter">ИП Лащевский Александр Максимович</p>
-                <p class="text-xs mt-1">ИНН: (впиши свой) | ОГРНИП: (впиши свой)</p>
+                <p class="text-xs mt-1">ОГРНИП: 324784700000000 (замени на свой) | ИНН: 780000000000 (замени на свой)</p>
             </div>
             <div class="text-xs">
                 © 2026. Все права защищены. Разработано в рамках Договора № 1/2026.
