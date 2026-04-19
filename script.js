@@ -1,4 +1,3 @@
-// --- МОДАЛКА ---
 let currentProduct = "";
 
 function openModal(name, price) {
@@ -11,19 +10,6 @@ function closeModal() {
     document.getElementById('lead-modal').classList.add('opacity-0', 'pointer-events-none');
 }
 
-function submitModalLead() {
-    const name = document.getElementById('modalName').value;
-    const phone = document.getElementById('modalPhone').value;
-    if (phone.length < 5) { alert("Введите телефон"); return; }
-    
-    const message = `⚡️ *БЫСТРЫЙ ЗАКАЗ*\n\n*Товар:* ${currentProduct}\n*Имя:* ${name}\n*Телефон:* ${phone}`;
-    sendToTelegram(message, () => {
-        alert("Спасибо! Мы свяжемся с вами.");
-        closeModal();
-    });
-}
-
-// --- КВИЗ ---
 function enableNextBtn(step) {
     const btn = document.getElementById(`btn-next-${step}`);
     btn.disabled = false;
@@ -37,6 +23,13 @@ function nextStep(step) {
     document.getElementById('step-counter').innerText = `Шаг ${step + 1} из 4`;
 }
 
+function submitModalLead() {
+    const name = document.getElementById('modalName').value;
+    const phone = document.getElementById('modalPhone').value;
+    const message = `⚡️ *БЫСТРЫЙ ЗАКАЗ*\n\n*Баня:* ${currentProduct}\n*Имя:* ${name}\n*Телефон:* ${phone}`;
+    sendToTelegram(message, () => { alert("Отправлено!"); closeModal(); });
+}
+
 function submitQuiz() {
     const name = document.getElementById('clientName').value;
     const phone = document.getElementById('clientPhone').value;
@@ -44,31 +37,23 @@ function submitQuiz() {
     const length = document.querySelector('input[name="length"]:checked')?.value || "-";
     const stove = document.querySelector('input[name="stove"]:checked')?.value || "-";
 
-    const message = `🛠 *ЗАЯВКА ИЗ КВИЗА*\n\n*Имя:* ${name}\n*Телефон:* ${phone}\n*Модель:* ${form}\n*Размер:* ${length}\n*Печь:* ${stove}`;
-    
+    const message = `🛠 *КВИЗ*\n\n*Модель:* ${form}\n*Длина:* ${length}\n*Печь:* ${stove}\n*Имя:* ${name}\n*Телефон:* ${phone}`;
     sendToTelegram(message, () => {
         document.getElementById('step-4').classList.add('hidden');
         document.getElementById('step-success').classList.remove('hidden');
     });
 }
 
-// --- ТЕЛЕГРАМ ---
 function sendToTelegram(message, callback) {
     fetch('/api/send-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: message })
-    }).then(r => {
-        if (r.ok) {
-            if (typeof ym !== 'undefined') { ym(2027115152, 'reachGoal', 'LEAD'); }
-            callback();
-        } else {
-            alert("Ошибка отправки");
-        }
+    }).then(r => { 
+        if (r.ok) { ym(2027115152, 'reachGoal', 'LEAD'); callback(); }
     });
 }
 
-// --- ГАЛЕРЕЯ ---
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById('gallery-photos');
     let html = '';
