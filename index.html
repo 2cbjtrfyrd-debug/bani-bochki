@@ -171,7 +171,6 @@
                         <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm mt-auto">Выбрать</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -207,19 +206,18 @@
                     </div>
                 </div>
                 <div id="quiz-container" class="relative min-h-[300px]">
-                    
                     <div id="step-1" class="quiz-step space-y-6 absolute inset-0 transition-opacity duration-300">
                         <p class="font-bold text-xl md:text-2xl">Какая модель бани вас интересует?</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <label class="cursor-pointer group">
-                                <input type="radio" name="form" value="Классическая (Торцевой вход)" class="hidden peer" onchange="enableNextBtn(1)">
+                                <input type="radio" name="form" value="Классическая" class="hidden peer" onchange="handleModelChange('classic')">
                                 <div class="quiz-card p-4 border-2 border-stone-200 rounded-xl peer-checked:border-green-600 peer-checked:bg-green-50">
                                     <span class="font-bold block uppercase tracking-tight">Классическая</span>
                                     <span class="text-xs text-stone-500">Вход с торца</span>
                                 </div>
                             </label>
                             <label class="cursor-pointer group">
-                                <input type="radio" name="form" value="Боковой вход" class="hidden peer" onchange="enableNextBtn(1)">
+                                <input type="radio" name="form" value="Боковой вход" class="hidden peer" onchange="handleModelChange('side')">
                                 <div class="quiz-card p-4 border-2 border-stone-200 rounded-xl peer-checked:border-green-600 peer-checked:bg-green-50">
                                     <span class="font-bold block uppercase tracking-tight">С боковым входом</span>
                                     <span class="text-xs text-stone-500">Для моделей от 4.5 метров</span>
@@ -231,13 +229,13 @@
 
                     <div id="step-2" class="quiz-step space-y-6 absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-300">
                         <p class="font-bold text-xl md:text-2xl">Выберите длину бани</p>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                            <label class="cursor-pointer"><input type="radio" name="length" value="2.5 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold">2.5 м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="3.5 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold">3.5 м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="4 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold">4 м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="4.5 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold">4.5 м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="5.5 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold">5.5 м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="6 метров" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold">6 м</div></label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="length-options">
+                            <label class="cursor-pointer length-opt" data-size="2.5"><input type="radio" name="length" value="2.5 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold transition-all">2.5 м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="3.5"><input type="radio" name="length" value="3.5 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold transition-all">3.5 м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="4.0"><input type="radio" name="length" value="4 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold transition-all">4 м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="4.5"><input type="radio" name="length" value="4.5 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold transition-all">4.5 м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="5.5"><input type="radio" name="length" value="5.5 метра" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold transition-all">5.5 м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="6.0"><input type="radio" name="length" value="6 метров" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 peer-checked:bg-green-50 font-bold transition-all">6 м</div></label>
                         </div>
                         <div class="flex gap-4 mt-8">
                             <button onclick="prevStep(2)" class="w-1/3 py-4 bg-stone-100 hover:bg-stone-200 text-stone-600 rounded-xl font-bold">← Назад</button>
@@ -275,7 +273,7 @@
                             <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         </div>
                         <h3 class="text-2xl font-bold">Спасибо за заявку!</h3>
-                        <p class="text-stone-500">Мы уже готовим смету для вашей бани. Менеджер свяжется с вами в течение 10 минут.</p>
+                        <p class="text-stone-500">Менеджер свяжется с вами в ближайшее время.</p>
                     </div>
                 </div>
             </div>
@@ -283,14 +281,12 @@
     </section>
 
     <footer class="py-12 bg-stone-900 text-stone-400 border-t border-stone-800">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-center md:text-left">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <div>
-                <p class="text-white font-bold uppercase tracking-tighter">ИП Лащевский Александр Максимович</p>
+                <p class="text-white font-bold uppercase">ИП Лащевский Александр Максимович</p>
                 <p class="text-xs mt-1">ИНН: 780000000000 | ОГРНИП: 324784700000000</p>
             </div>
-            <div class="text-xs">
-                © 2026. Все права защищены. Разработано в рамках Договора № 1/2026.
-            </div>
+            <div class="text-xs mt-6 md:mt-0">© 2026. Все права защищены.</div>
         </div>
     </footer>
 
