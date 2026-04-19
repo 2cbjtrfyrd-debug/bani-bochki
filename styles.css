@@ -1,0 +1,50 @@
+/* Базовые настройки шрифта и плавной прокрутки */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Наш оптимизированный фон */
+.bg-wood {
+    background-image: url('img/hero-bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Кастомные тени для текста, чтобы он не терялся на пестром фоне веток */
+.text-shadow-lg {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.text-shadow-md {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Плавные анимации для карточек в квизе */
+.quiz-card {
+    transition: all 0.2s ease-in-out;
+}
+
+.quiz-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(22, 163, 74, 0.15);
+}
+
+/* Скрываем стандартный скроллбар для эстетики (по желанию) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f5f5f4; 
+}
+::-webkit-scrollbar-thumb {
+    background: #d6d3d1; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a29e; 
+}
