@@ -20,7 +20,8 @@
                 <span class="text-[10px] text-stone-500 font-medium">Производство бань с 2016 года</span>
             </div>
             <div class="hidden md:flex items-center space-x-8 font-semibold text-sm">
-                <a href="#catalog" class="hover:text-green-700 transition">Каталог</a>
+                <a href="#catalog" class="hover:text-green-700 transition">Прайс-лист</a>
+                <a href="#gallery" class="hover:text-green-700 transition">Наши работы</a>
                 <a href="#quiz" class="hover:text-green-700 transition">Расчет стоимости</a>
             </div>
             <div class="flex flex-col items-end">
@@ -63,85 +64,152 @@
     </header>
 
     <section id="catalog" class="py-24 bg-stone-50 scroll-mt-20">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="text-green-600 font-bold uppercase tracking-widest text-xs">Популярные модели</span>
+        <div class="max-w-7xl mx-auto px-4 relative">
+            <div class="text-center mb-12">
+                <span class="text-green-600 font-bold uppercase tracking-widest text-xs">Прайс-лист</span>
                 <h2 class="text-3xl md:text-4xl font-bold mt-2">Каталог бань-бочек</h2>
-                <p class="text-stone-500 mt-4 max-w-2xl mx-auto">Выбирайте подходящую форму и размер. Любую баню можно укомплектовать под ваши пожелания.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-stone-100 transition-transform hover:-translate-y-2">
-                    <div class="h-64 bg-stone-200 relative">
-                        <img src="https://images.unsplash.com/photo-1587314545318-9719eb793fb5?auto=format&fit=crop&q=80&w=800" alt="Баня Круглая" class="w-full h-full object-cover">
-                        <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Хит продаж</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-2">Баня «Круглая»</h3>
-                        <p class="text-stone-500 text-sm mb-6">Классическая форма, идеальная циркуляция воздуха и быстрый прогрев.</p>
-                        <div class="space-y-2 mb-8 text-sm font-medium">
-                            <div class="flex justify-between border-b border-stone-100 pb-2"><span>Длина:</span> <span>от 2 до 6 метров</span></div>
-                            <div class="flex justify-between border-b border-stone-100 pb-2"><span>Вместимость:</span> <span>до 6 человек</span></div>
+            <button onclick="scrollCarousel('catalog-slider', -1)" class="absolute -left-4 top-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg text-stone-800 hover:bg-stone-100 transition-all border border-stone-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button onclick="scrollCarousel('catalog-slider', 1)" class="absolute -right-4 top-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg text-stone-800 hover:bg-stone-100 transition-all border border-stone-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+
+            <div id="catalog-slider" class="flex overflow-x-auto gap-6 snap-x snap-mandatory hide-scrollbar pb-8 pt-4 px-4 -mx-4">
+                
+                <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-white rounded-3xl overflow-hidden shadow-md border border-stone-100 flex flex-col hover:-translate-y-2 transition-transform">
+                    <div class="h-48 bg-stone-200 relative"><img src="img/model1.webp" alt="Баня 2.5м" class="w-full h-full object-cover"></div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-4">Баня-бочка 2.5 метра</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Вместимость:</span> <span>2-4 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Отделений:</span> <span>1</span></div>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="block text-xs text-stone-400">Цена:</span>
-                                <span class="text-xl font-extrabold">от 145 000 ₽</span>
-                            </div>
-                            <a href="#quiz" class="px-5 py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors">Рассчитать</a>
-                        </div>
+                        <div class="text-xl font-extrabold mb-4 text-green-700">155 200 ₽</div>
+                        <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors mt-auto">Выбрать</a>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-stone-100 transition-transform hover:-translate-y-2">
-                    <div class="h-64 bg-stone-200 relative">
-                        <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&q=80&w=800" alt="Баня Квадро" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-2">Баня «Квадро»</h3>
-                        <p class="text-stone-500 text-sm mb-6">Увеличенное внутреннее пространство за счет квадратной формы.</p>
-                        <div class="space-y-2 mb-8 text-sm font-medium">
-                            <div class="flex justify-between border-b border-stone-100 pb-2"><span>Длина:</span> <span>от 3 до 6 метров</span></div>
-                            <div class="flex justify-between border-b border-stone-100 pb-2"><span>Вместимость:</span> <span>до 8 человек</span></div>
+                <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-white rounded-3xl overflow-hidden shadow-md border border-stone-100 flex flex-col hover:-translate-y-2 transition-transform">
+                    <div class="h-48 bg-stone-200 relative"><img src="img/model2.webp" alt="Баня 3.5м" class="w-full h-full object-cover"></div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-4">Баня-бочка 3.5 метра</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Вместимость:</span> <span>3-5 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Отделений:</span> <span>2</span></div>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="block text-xs text-stone-400">Цена:</span>
-                                <span class="text-xl font-extrabold">от 185 000 ₽</span>
-                            </div>
-                            <a href="#quiz" class="px-5 py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors">Рассчитать</a>
-                        </div>
+                        <div class="text-xl font-extrabold mb-4 text-green-700">175 800 ₽</div>
+                        <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors mt-auto">Выбрать</a>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-stone-100 transition-transform hover:-translate-y-2">
-                    <div class="h-64 bg-stone-200 relative">
-                        <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=800" alt="Баня Викинг" class="w-full h-full object-cover">
-                        <div class="absolute top-4 right-4 bg-stone-900 text-white text-xs font-bold px-3 py-1 rounded-full">Премиум</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-2">Баня «Викинг»</h3>
-                        <p class="text-stone-500 text-sm mb-6">Эксклюзивный дизайн с двускатной крышей и панорамным окном.</p>
-                        <div class="space-y-2 mb-8 text-sm font-medium">
-                            <div class="flex justify-between border-b border-stone-100 pb-2"><span>Длина:</span> <span>от 4 до 6 метров</span></div>
-                            <div class="flex justify-between border-b border-stone-100 pb-2"><span>Вместимость:</span> <span>до 8 человек</span></div>
+                <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-white rounded-3xl overflow-hidden shadow-md border border-stone-100 flex flex-col hover:-translate-y-2 transition-transform">
+                    <div class="h-48 bg-stone-200 relative"><img src="img/model3.webp" alt="Баня 4м" class="w-full h-full object-cover"></div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-4">Баня-бочка 4 метра</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Вместимость:</span> <span>4-6 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Отделений:</span> <span>2</span></div>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="block text-xs text-stone-400">Цена:</span>
-                                <span class="text-xl font-extrabold">от 210 000 ₽</span>
-                            </div>
-                            <a href="#quiz" class="px-5 py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors">Рассчитать</a>
-                        </div>
+                        <div class="text-xl font-extrabold mb-4 text-green-700">187 500 ₽</div>
+                        <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors mt-auto">Выбрать</a>
                     </div>
                 </div>
+
+                <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-white rounded-3xl overflow-hidden shadow-md border border-stone-100 flex flex-col hover:-translate-y-2 transition-transform">
+                    <div class="h-48 bg-stone-200 relative"><img src="img/model4.webp" alt="Баня 4.5м" class="w-full h-full object-cover"></div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-4">Баня-бочка 4.5 метра</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Вместимость:</span> <span>4-6 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Отделений:</span> <span>2</span></div>
+                        </div>
+                        <div class="text-xl font-extrabold mb-4 text-green-700">196 500 ₽</div>
+                        <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors mt-auto">Выбрать</a>
+                    </div>
+                </div>
+
+                <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-white rounded-3xl overflow-hidden shadow-md border border-stone-100 flex flex-col hover:-translate-y-2 transition-transform">
+                    <div class="h-48 bg-stone-200 relative"><img src="img/model5.webp" alt="Баня 4.5м Боковой" class="w-full h-full object-cover"></div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-4">Баня 4.5 м (боковой вход)</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Вместимость:</span> <span>5-6 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Отделений:</span> <span>2</span></div>
+                        </div>
+                        <div class="text-xl font-extrabold mb-4 text-green-700">218 250 ₽</div>
+                        <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors mt-auto">Выбрать</a>
+                    </div>
+                </div>
+
+                <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-white rounded-3xl overflow-hidden shadow-md border border-stone-100 flex flex-col hover:-translate-y-2 transition-transform">
+                    <div class="h-48 bg-stone-200 relative"><img src="img/model6.webp" alt="Баня 5м Боковой" class="w-full h-full object-cover"></div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-4">Баня 5 м (боковой вход)</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Вместимость:</span> <span>6-8 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Отделений:</span> <span>3</span></div>
+                        </div>
+                        <div class="text-xl font-extrabold mb-4 text-green-700">244 320 ₽</div>
+                        <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors mt-auto">Выбрать</a>
+                    </div>
+                </div>
+
+                <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-white rounded-3xl overflow-hidden shadow-md border border-stone-100 flex flex-col hover:-translate-y-2 transition-transform">
+                    <div class="h-48 bg-stone-200 relative"><img src="img/model7.webp" alt="Баня 5.5м Боковой" class="w-full h-full object-cover"></div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-4">Баня 5.5 м (боковой)</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Вместимость:</span> <span>7-9 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Отделений:</span> <span>3</span></div>
+                        </div>
+                        <div class="text-xl font-extrabold mb-4 text-green-700">268 600 ₽</div>
+                        <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors mt-auto">Выбрать</a>
+                    </div>
+                </div>
+
+                <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-white rounded-3xl overflow-hidden shadow-md border border-stone-100 flex flex-col hover:-translate-y-2 transition-transform">
+                    <div class="h-48 bg-stone-200 relative"><img src="img/model8.webp" alt="Баня 6м Боковой" class="w-full h-full object-cover"></div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-4">Баня 6 м (боковой вход)</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Вместимость:</span> <span>8-10 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-100 pb-1"><span>Отделений:</span> <span>3</span></div>
+                        </div>
+                        <div class="text-xl font-extrabold mb-4 text-green-700">289 600 ₽</div>
+                        <a href="#quiz" class="text-center py-3 bg-stone-900 hover:bg-stone-800 text-white rounded-xl font-bold text-sm transition-colors mt-auto">Выбрать</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section id="quiz" class="py-24 bg-white scroll-mt-20">
+    <section id="gallery" class="py-24 bg-white scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 relative">
+            <div class="text-center mb-12">
+                <span class="text-green-600 font-bold uppercase tracking-widest text-xs">Наши проекты</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">Примеры установленных бань</h2>
+            </div>
+
+            <button onclick="scrollCarousel('gallery-slider', -1)" class="absolute -left-4 top-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg text-stone-800 hover:bg-stone-100 transition-all border border-stone-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button onclick="scrollCarousel('gallery-slider', 1)" class="absolute -right-4 top-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg text-stone-800 hover:bg-stone-100 transition-all border border-stone-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+
+            <div id="gallery-slider" class="flex overflow-x-auto gap-4 snap-x snap-mandatory hide-scrollbar pb-8 pt-4 px-4 -mx-4">
+                <div id="gallery-photos" class="contents"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="py-24 bg-stone-50 scroll-mt-20">
         <div class="max-w-3xl mx-auto px-4">
-            <div class="bg-stone-50 rounded-3xl p-8 md:p-12 shadow-2xl border border-stone-100 relative overflow-hidden">
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-stone-100 relative overflow-hidden">
                 
                 <div class="mb-8">
                     <div class="flex justify-between items-end mb-4">
