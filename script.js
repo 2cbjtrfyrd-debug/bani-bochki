@@ -1,122 +1,80 @@
-let selectedFromCatalog = false;
+// --- ЛОГИКА МОДАЛЬНОГО ОКНА ---
+let currentProduct = "";
 
-function enableNextBtn(stepIndex) {
-    const btn = document.getElementById(`btn-next-${stepIndex}`);
-    if (btn) {
-        btn.disabled = false;
-        btn.classList.remove('bg-stone-300', 'text-stone-500');
-        btn.classList.add('bg-stone-900', 'text-white', 'hover:bg-stone-800');
-    }
+function openModal(name, price) {
+    currentProduct = name;
+    document.getElementById('modal-product-name').innerText = name + " — " + price;
+    const modal = document.getElementById('lead-modal');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
 }
 
-// Выбор из каталога
-function selectModel(model, size) {
-    selectedFromCatalog = true;
+function closeModal() {
+    const modal = document.getElementById('lead-modal');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+}
+
+function submitModalLead() {
+    const name = document.getElementById('modalName').value;
+    const phone = document.getElementById('modalPhone').value;
     
-    // Подставляем данные в скрытые радиокнопки
-    const modelRadio = document.querySelector(`input[name="form"][value="${model}"]`);
-    if(modelRadio) modelRadio.checked = true;
-    
-    const sizeRadio = document.querySelector(`input[name="length"][value="${size}"]`);
-    if(sizeRadio) sizeRadio.checked = true;
-
-    // Скрываем все шаги и показываем Шаг 3 (печь)
-    document.querySelectorAll('.quiz-step').forEach(s => s.classList.add('opacity-0', 'pointer-events-none'));
-    document.getElementById('step-3').classList.remove('opacity-0', 'pointer-events-none');
-    
-    // Скрываем кнопку "Назад" на 3 шаге, чтобы не вернулись к выбору модели
-    document.getElementById('btn-back-3').style.display = 'none';
-    
-    updateProgress(3);
-}
-
-// Если нажали "Рассчитать" в шапке - сбрасываем квиз на начало
-function resetQuiz() {
-    selectedFromCatalog = false;
-    document.querySelectorAll('.quiz-step').forEach(s => s.classList.add('opacity-0', 'pointer-events-none'));
-    document.getElementById('step-1').classList.remove('opacity-0', 'pointer-events-none');
-    document.getElementById('btn-back-3').style.display = 'block';
-    updateProgress(1);
-}
-
-function handleModelChange(type) {
-    const lengthOptions = document.querySelectorAll('.length-opt');
-    lengthOptions.forEach(opt => {
-        const size = parseFloat(opt.getAttribute('data-size'));
-        const radio = opt.querySelector('input');
-        if (type === 'side' && size < 4.5) {
-            opt.classList.add('opacity-30', 'pointer-events-none', 'grayscale');
-            radio.disabled = true;
-        } else {
-            opt.classList.remove('opacity-30', 'pointer-events-none', 'grayscale');
-            radio.disabled = false;
-        }
-    });
-    enableNextBtn(1);
-}
-
-function nextStep(currentStep) {
-    document.getElementById(`step-${currentStep}`).classList.add('opacity-0', 'pointer-events-none');
-    const next = currentStep + 1;
-    document.getElementById(`step-${next}`).classList.remove('opacity-0', 'pointer-events-none');
-    updateProgress(next);
-}
-
-function prevStep(currentStep) {
-    document.getElementById(`step-${currentStep}`).classList.add('opacity-0', 'pointer-events-none');
-    const prev = currentStep - 1;
-    document.getElementById(`step-${prev}`).classList.remove('opacity-0', 'pointer-events-none');
-    updateProgress(prev);
-}
-
-function updateProgress(step) {
-    document.getElementById('step-counter').innerText = `Шаг ${step} из 4`;
-    document.getElementById('progress-bar').style.width = `${(step / 4) * 100}%`;
-}
-
-function submitQuiz() {
-    const name = document.getElementById('clientName').value;
-    const phone = document.getElementById('clientPhone').value;
     if (phone.length < 5) { alert("Введите номер телефона"); return; }
     
-    const form = document.querySelector('input[name="form"]:checked')?.value || "-";
-    const length = document.querySelector('input[name="length"]:checked')?.value || "-";
-    const stove = document.querySelector('input[name="stove"]:checked')?.value || "-";
+    const message = `⚡️ *БЫСТРЫЙ ЗАКАЗ ИЗ КАТАЛОГА*\n\n*Товар:* ${currentProduct}\n*Имя:* ${name}\n*Телефон:* ${phone}`;
     
-    const message = `🔥 *Новая заявка!*\n\n*Имя:* ${name}\n*Телефон:* ${phone}\n\n*Ответы:*\n🪵 Модель: ${form}\n📏 Размер: ${length}\n🔥 Печь: ${stove}`;
-    
+    sendToTelegram(message, () => {
+        alert("Спасибо! Мы свяжемся с вами для уточнения деталей.");
+        closeModal();
+    });
+}
+
+// --- ОБЩАЯ ОТПРАВКА ---
+function sendToTelegram(message, onSuccess) {
     fetch('/api/send-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: message })
     }).then(r => {
         if (r.ok) {
-            // ФИКСИРУЕМ ЦЕЛЬ В ЯНДЕКС.МЕТРИКЕ
-            if (typeof ym !== 'undefined') {
-                ym(НОМЕР_СЧЕТЧИКА, 'reachGoal', 'LEAD');
-            }
-            document.getElementById('step-4').classList.add('opacity-0', 'pointer-events-none');
-            document.getElementById('step-success').classList.remove('opacity-0', 'pointer-events-none');
-            document.getElementById('step-counter').innerText = "Готово!";
+            if (typeof ym !== 'undefined') { ym(2027115152, 'reachGoal', 'LEAD'); }
+            onSuccess();
+        } else {
+            alert("Ошибка сервера. Попробуйте еще раз.");
         }
     });
 }
 
-function scrollCarousel(containerId, direction) {
-    document.getElementById(containerId).scrollBy({ left: direction * 350, behavior: 'smooth' });
+// --- ЛОГИКА КВИЗА (КАСТОМ) ---
+function enableNextBtn(stepIndex) {
+    const btn = document.getElementById(`btn-next-${stepIndex}`);
+    if (btn) {
+        btn.disabled = false;
+        btn.classList.remove('bg-stone-300', 'text-stone-500');
+        btn.classList.add('bg-stone-900', 'text-white');
+    }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const galleryContainer = document.getElementById('gallery-photos');
-    if (galleryContainer) {
-        let photosHTML = '';
-        for (let i = 8; i <= 27; i++) {
-            photosHTML += `
-                <div class="snap-center shrink-0 w-[280px] h-[350px] md:w-[320px] md:h-[400px] rounded-2xl overflow-hidden shadow-md">
-                    <img src="img/${i}_result.webp" class="w-full h-full object-cover">
-                </div>
-            `;
-        }
-        galleryContainer.innerHTML = photosHTML;
-    }
-});
+function nextStep(step) {
+    document.getElementById(`step-${step}`).classList.add('hidden');
+    document.getElementById(`step-${step + 1}`).classList.remove('hidden');
+    updateProgress(step + 1);
+}
+
+function updateProgress(step) {
+    document.getElementById('step-counter').innerText = `Шаг ${step} из 4`;
+}
+
+function submitQuiz() {
+    const name = document.getElementById('clientName').value;
+    const phone = document.getElementById('clientPhone').value;
+    
+    const form = document.querySelector('input[name="form"]:checked')?.value || "-";
+    const length = document.querySelector('input[name="length"]:checked')?.value || "-";
+    const stove = document.querySelector('input[name="stove"]:checked')?.value || "-";
+
+    const message = `🛠 *КАСТОМНЫЙ РАСЧЕТ (КВИЗ)*\n\n*Имя:* ${name}\n*Телефон:* ${phone}\n*Модель:* ${form}\n*Размер:* ${length}\n*Печь:* ${stove}`;
+    
+    sendToTelegram(message, () => {
+        document.getElementById('step-4').classList.add('hidden');
+        document.getElementById('step-success').classList.remove('hidden');
+    });
+}
