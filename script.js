@@ -1,3 +1,5 @@
+let selectedFromCatalog = false;
+
 function enableNextBtn(stepIndex) {
     const btn = document.getElementById(`btn-next-${stepIndex}`);
     if (btn) {
@@ -7,20 +9,41 @@ function enableNextBtn(stepIndex) {
     }
 }
 
-// Новая логика: блокировка размеров при выборе бокового входа
+// Выбор из каталога
+function selectModel(model, size) {
+    selectedFromCatalog = true;
+    
+    // Подставляем данные в скрытые радиокнопки
+    const modelRadio = document.querySelector(`input[name="form"][value="${model}"]`);
+    if(modelRadio) modelRadio.checked = true;
+    
+    const sizeRadio = document.querySelector(`input[name="length"][value="${size}"]`);
+    if(sizeRadio) sizeRadio.checked = true;
+
+    // Скрываем все шаги и показываем Шаг 3 (печь)
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.add('opacity-0', 'pointer-events-none'));
+    document.getElementById('step-3').classList.remove('opacity-0', 'pointer-events-none');
+    
+    // Скрываем кнопку "Назад" на 3 шаге, чтобы не вернулись к выбору модели
+    document.getElementById('btn-back-3').style.display = 'none';
+    
+    updateProgress(3);
+}
+
+// Если нажали "Рассчитать" в шапке - сбрасываем квиз на начало
+function resetQuiz() {
+    selectedFromCatalog = false;
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.add('opacity-0', 'pointer-events-none'));
+    document.getElementById('step-1').classList.remove('opacity-0', 'pointer-events-none');
+    document.getElementById('btn-back-3').style.display = 'block';
+    updateProgress(1);
+}
+
 function handleModelChange(type) {
     const lengthOptions = document.querySelectorAll('.length-opt');
-    const lengthRadios = document.querySelectorAll('input[name="length"]');
-    
-    // Сбрасываем выбор размера при смене типа бани
-    lengthRadios.forEach(radio => radio.checked = false);
-    document.getElementById('btn-next-2').disabled = true;
-    document.getElementById('btn-next-2').classList.replace('bg-stone-900', 'bg-stone-300');
-
     lengthOptions.forEach(opt => {
         const size = parseFloat(opt.getAttribute('data-size'));
         const radio = opt.querySelector('input');
-
         if (type === 'side' && size < 4.5) {
             opt.classList.add('opacity-30', 'pointer-events-none', 'grayscale');
             radio.disabled = true;
@@ -29,22 +52,21 @@ function handleModelChange(type) {
             radio.disabled = false;
         }
     });
-
     enableNextBtn(1);
 }
 
 function nextStep(currentStep) {
     document.getElementById(`step-${currentStep}`).classList.add('opacity-0', 'pointer-events-none');
-    const nextStepNum = currentStep + 1;
-    document.getElementById(`step-${nextStepNum}`).classList.remove('opacity-0', 'pointer-events-none');
-    updateProgress(nextStepNum);
+    const next = currentStep + 1;
+    document.getElementById(`step-${next}`).classList.remove('opacity-0', 'pointer-events-none');
+    updateProgress(next);
 }
 
 function prevStep(currentStep) {
     document.getElementById(`step-${currentStep}`).classList.add('opacity-0', 'pointer-events-none');
-    const prevStepNum = currentStep - 1;
-    document.getElementById(`step-${prevStepNum}`).classList.remove('opacity-0', 'pointer-events-none');
-    updateProgress(prevStepNum);
+    const prev = currentStep - 1;
+    document.getElementById(`step-${prev}`).classList.remove('opacity-0', 'pointer-events-none');
+    updateProgress(prev);
 }
 
 function updateProgress(step) {
@@ -69,6 +91,10 @@ function submitQuiz() {
         body: JSON.stringify({ message: message })
     }).then(r => {
         if (r.ok) {
+            // ФИКСИРУЕМ ЦЕЛЬ В ЯНДЕКС.МЕТРИКЕ
+            if (typeof ym !== 'undefined') {
+                ym(НОМЕР_СЧЕТЧИКА, 'reachGoal', 'LEAD');
+            }
             document.getElementById('step-4').classList.add('opacity-0', 'pointer-events-none');
             document.getElementById('step-success').classList.remove('opacity-0', 'pointer-events-none');
             document.getElementById('step-counter').innerText = "Готово!";
@@ -84,11 +110,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const galleryContainer = document.getElementById('gallery-photos');
     if (galleryContainer) {
         let photosHTML = '';
-        // Галерея начинается с 8 фото (1-7 в каталоге)
         for (let i = 8; i <= 27; i++) {
             photosHTML += `
                 <div class="snap-center shrink-0 w-[280px] h-[350px] md:w-[320px] md:h-[400px] rounded-2xl overflow-hidden shadow-md">
-                    <img src="img/${i}_result.webp" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    <img src="img/${i}_result.webp" class="w-full h-full object-cover">
                 </div>
             `;
         }
