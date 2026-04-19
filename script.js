@@ -1,35 +1,35 @@
 // Функция разблокировки кнопки "Далее", если выбран ответ
 function enableNextBtn(stepIndex) {
     const btn = document.getElementById(`btn-next-${stepIndex}`);
-    btn.disabled = false;
-    btn.classList.remove('bg-stone-300', 'text-stone-500');
-    btn.classList.add('bg-stone-900', 'text-white', 'hover:bg-stone-800');
+    if (btn) {
+        btn.disabled = false;
+        btn.classList.remove('bg-stone-300', 'text-stone-500');
+        btn.classList.add('bg-stone-900', 'text-white', 'hover:bg-stone-800');
+    }
 }
 
-// Функция перехода на следующий шаг
+// Переход на следующий шаг
 function nextStep(currentStep) {
-    // Прячем текущий шаг
     const currentDiv = document.getElementById(`step-${currentStep}`);
     currentDiv.classList.add('opacity-0', 'pointer-events-none');
     
-    // Показываем следующий
-    const nextStep = currentStep + 1;
-    const nextDiv = document.getElementById(`step-${nextStep}`);
+    const nextStepNum = currentStep + 1;
+    const nextDiv = document.getElementById(`step-${nextStepNum}`);
     nextDiv.classList.remove('opacity-0', 'pointer-events-none');
     
-    updateProgress(nextStep);
+    updateProgress(nextStepNum);
 }
 
-// Функция возврата на предыдущий шаг
+// Возврат на предыдущий шаг
 function prevStep(currentStep) {
     const currentDiv = document.getElementById(`step-${currentStep}`);
     currentDiv.classList.add('opacity-0', 'pointer-events-none');
     
-    const prevStep = currentStep - 1;
-    const prevDiv = document.getElementById(`step-${prevStep}`);
+    const prevStepNum = currentStep - 1;
+    const prevDiv = document.getElementById(`step-${prevStepNum}`);
     prevDiv.classList.remove('opacity-0', 'pointer-events-none');
     
-    updateProgress(prevStep);
+    updateProgress(prevStepNum);
 }
 
 // Обновление прогресс-бара
@@ -43,7 +43,7 @@ function updateProgress(step) {
     }
 }
 
-// Отправка заявки
+// Отправка данных в Telegram
 function submitQuiz() {
     const name = document.getElementById('clientName').value;
     const phone = document.getElementById('clientPhone').value;
@@ -53,25 +53,35 @@ function submitQuiz() {
         return;
     }
     
-    // Здесь мы прячем форму и показываем экран успеха
-    const currentDiv = document.getElementById(`step-4`);
-    currentDiv.classList.add('opacity-0', 'pointer-events-none');
+    // ВАЖНО: ВСТАВЬ СВОИ ДАННЫЕ ИЗ ТЕЛЕГРАМА СЮДА:
+    const BOT_TOKEN = "ТВОЙ_ТОКЕН_ОТ_BOTFATHER";
+    const CHAT_ID = "ТВОЙ_CHAT_ID";
     
-    const successDiv = document.getElementById('step-success');
-    successDiv.classList.remove('opacity-0', 'pointer-events-none');
+    const form = document.querySelector('input[name="form"]:checked')?.value || "Не выбрано";
+    const length = document.querySelector('input[name="length"]:checked')?.value || "Не выбрано";
+    const stove = document.querySelector('input[name="stove"]:checked')?.value || "Не выбрано";
     
-    document.getElementById('step-counter').innerText = "Готово!";
-    document.getElementById('progress-bar').style.width = "100%";
+    const message = `🔥 *Новая заявка с сайта!*\n\n*Имя:* ${name}\n*Телефон:* ${phone}\n\n*Ответы из квиза:*\n🪵 Форма: ${form}\n📏 Длина: ${length}\n🔥 Печь: ${stove}`;
     
-    // Собираем все ответы
-    const form = document.querySelector('input[name="form"]:checked')?.value;
-    const length = document.querySelector('input[name="length"]:checked')?.value;
-    const stove = document.querySelector('input[name="stove"]:checked')?.value;
-    
-    console.log("=== НОВАЯ ЗАЯВКА (ЛИД) ===");
-    console.log(`Имя: ${name}`);
-    console.log(`Телефон: ${phone}`);
-    console.log(`Форма: ${form}, Длина: ${length}, Печь: ${stove}`);
-    
-    // В будущем мы добавим сюда код для отправки этих данных в Telegram бота!
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+                const currentDiv = document.getElementById(`step-4`);
+                currentDiv.classList.add('opacity-0', 'pointer-events-none');
+                
+                const successDiv = document.getElementById('step-success');
+                successDiv.classList.remove('opacity-0', 'pointer-events-none');
+                
+                document.getElementById('step-counter').innerText = "Готово!";
+                document.getElementById('progress-bar').style.width = "100%";
+            } else {
+                alert("Ошибка при отправке заявки. Проверьте настройки бота.");
+            }
+        })
+        .catch(error => {
+            console.error("Ошибка:", error);
+            alert("Ошибка сети. Проверьте подключение.");
+        });
 }
