@@ -1,8 +1,6 @@
 // --- ВАЛИДАЦИЯ ТЕЛЕФОНА ---
 function isValidPhone(phone) {
-    // Оставляем только цифры
     const digits = phone.replace(/\D/g, '');
-    // Проверяем, что цифр от 10 до 15 (хватит для любых номеров)
     return digits.length >= 10 && digits.length <= 15;
 }
 
@@ -17,7 +15,6 @@ function openModal(name, price) {
 
 function closeModal() {
     document.getElementById('lead-modal').classList.add('opacity-0', 'pointer-events-none');
-    // Сбрасываем форму через 300мс (пока модалка плавно исчезает)
     setTimeout(() => {
         document.getElementById('modal-form-content').classList.remove('hidden');
         document.getElementById('modal-success-content').classList.add('hidden');
@@ -31,14 +28,13 @@ function submitModalLead() {
     const phone = document.getElementById('modalPhone').value;
     
     if (!isValidPhone(phone)) { 
-        alert("Пожалуйста, введите корректный номер телефона (минимум 10 цифр)"); 
+        alert("Пожалуйста, введите корректный номер телефона, например: +7 (999) 000-00-00"); 
         return; 
     }
     
     const message = `⚡️ *БЫСТРЫЙ ЗАКАЗ*\n\n*Баня:* ${currentProduct}\n*Имя:* ${name}\n*Телефон:* ${phone}`;
     
     sendToTelegram(message, () => {
-        // Прячем форму, показываем галочку успеха
         document.getElementById('modal-form-content').classList.add('hidden');
         document.getElementById('modal-success-content').classList.remove('hidden');
     });
@@ -50,7 +46,6 @@ function handleModelChange(type) {
     const lengthOptions = document.querySelectorAll('.length-opt');
     const lengthRadios = document.querySelectorAll('input[name="length"]');
     
-    // Сбрасываем выбор размера при смене типа бани
     lengthRadios.forEach(radio => radio.checked = false);
     document.getElementById('btn-next-2').disabled = true;
     document.getElementById('btn-next-2').classList.replace('bg-stone-900', 'bg-stone-300');
@@ -95,7 +90,7 @@ function submitQuiz() {
     const phone = document.getElementById('clientPhone').value;
     
     if (!isValidPhone(phone)) { 
-        alert("Пожалуйста, введите корректный номер телефона (минимум 10 цифр)"); 
+        alert("Пожалуйста, введите корректный номер телефона, например: +7 (999) 000-00-00"); 
         return; 
     }
 
@@ -111,7 +106,7 @@ function submitQuiz() {
     });
 }
 
-// --- ОТПРАВКА В ТЕЛЕГРАМ (Vercel API) ---
+// --- ОТПРАВКА В ТЕЛЕГРАМ (Vercel API + Яндекс.Метрика) ---
 function sendToTelegram(message, callback) {
     fetch('/api/send-lead', {
         method: 'POST',
@@ -119,7 +114,7 @@ function sendToTelegram(message, callback) {
         body: JSON.stringify({ message: message })
     }).then(r => { 
         if (r.ok) { 
-            if (typeof ym !== 'undefined') { ym(2027115152, 'reachGoal', 'LEAD'); }
+            if (typeof ym !== 'undefined') { ym(108671372, 'reachGoal', 'LEAD'); }
             callback(); 
         } else {
             alert("Ошибка отправки. Попробуйте еще раз.");
