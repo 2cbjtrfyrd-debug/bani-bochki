@@ -43,47 +43,49 @@ function updateProgress(step) {
     }
 }
 
-// Отправка данных в Telegram
+// Безопасная отправка данных на наш сервер Vercel (Обход блокировок РФ)
 function submitQuiz() {
     const name = document.getElementById('clientName').value;
     const phone = document.getElementById('clientPhone').value;
     
     if (phone.length < 5) {
-        alert("Пожалуйста, введите номер телефона");
+        alert("Пожалуйста, введите корректный номер телефона");
         return;
     }
-    
-    // ВАЖНО: ВСТАВЬ СВОИ ДАННЫЕ ИЗ ТЕЛЕГРАМА СЮДА:
-    const BOT_TOKEN = "8740212168:AAGw2J8bXJclrGVLB4rRWWkm2pLlX6Y5HgE";
-    const CHAT_ID = "2027115152";
     
     const form = document.querySelector('input[name="form"]:checked')?.value || "Не выбрано";
     const length = document.querySelector('input[name="length"]:checked')?.value || "Не выбрано";
     const stove = document.querySelector('input[name="stove"]:checked')?.value || "Не выбрано";
     
-    const message = `🔥 *Новая заявка!*\n\n*Имя:* ${name}\n*Телефон:* ${phone}\n\n*Ответы:*\n🪵 Форма: ${form}\n📏 Длина: ${length}\n🔥 Печь: ${stove}`;
+    const message = `🔥 *Новая заявка с сайта!*\n\n*Имя:* ${name}\n*Телефон:* ${phone}\n\n*Ответы из квиза:*\n🪵 Форма: ${form}\n📏 Длина: ${length}\n🔥 Печь: ${stove}`;
     
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
-
-    fetch(url)
-        .then(response => {
-            if (response.ok) {
-                const currentDiv = document.getElementById(`step-4`);
-                currentDiv.classList.add('opacity-0', 'pointer-events-none');
-                
-                const successDiv = document.getElementById('step-success');
-                successDiv.classList.remove('opacity-0', 'pointer-events-none');
-                
-                document.getElementById('step-counter').innerText = "Готово!";
-                document.getElementById('progress-bar').style.width = "100%";
-            } else {
-                alert("Ошибка отправки. Проверьте настройки бота.");
-            }
-        })
-        .catch(error => {
-            console.error("Ошибка:", error);
-            alert("Ошибка сети.");
-        });
+    // Стучимся в нашу серверную функцию Vercel
+    fetch('/api/send-lead', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(response => {
+        if (response.ok) {
+            // Успех! Прячем форму и показываем окно благодарности
+            const currentDiv = document.getElementById(`step-4`);
+            currentDiv.classList.add('opacity-0', 'pointer-events-none');
+            
+            const successDiv = document.getElementById('step-success');
+            successDiv.classList.remove('opacity-0', 'pointer-events-none');
+            
+            document.getElementById('step-counter').innerText = "Готово!";
+            document.getElementById('progress-bar').style.width = "100%";
+        } else {
+            alert("Ошибка при отправке заявки. Попробуйте позже.");
+        }
+    })
+    .catch(error => {
+        console.error("Ошибка:", error);
+        alert("Ошибка сети. Проверьте подключение к интернету.");
+    });
 }
 
 // Функция прокрутки каруселей (Каталог и Галерея)
