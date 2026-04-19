@@ -1,19 +1,16 @@
 export default async function handler(req, res) {
-    // Разрешаем только POST-запросы
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
     const { message } = req.body;
 
-    // Твои ключи теперь скрыты на сервере и в полной безопасности
     const BOT_TOKEN = "8740212168:AAGw2J8bXJclrGVLB4rRWwkm2pllX6Y5HgE";
     const CHAT_ID = "2027115152";
 
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
     try {
-        // Сервер Vercel (США/Европа) сам стучится в Телеграм
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -26,12 +23,18 @@ export default async function handler(req, res) {
             })
         });
 
+        // Читаем ответ от Телеграма
+        const telegramAnswer = await response.json();
+
         if (response.ok) {
             res.status(200).json({ success: true });
         } else {
-            res.status(500).json({ error: 'Telegram API error' });
+            // Если Телеграм недоволен, выводим причину в логи Vercel
+            console.error("Ошибка от Телеграма:", telegramAnswer);
+            res.status(500).json({ error: 'Telegram rejected', details: telegramAnswer });
         }
     } catch (error) {
+        console.error("Системная ошибка:", error);
         res.status(500).json({ error: 'Server error' });
     }
 }
