@@ -26,6 +26,13 @@
                 <span class="text-xl font-extrabold text-green-800 tracking-tight uppercase leading-none">Кедр Премиум</span>
                 <span class="text-[10px] text-stone-500 font-medium uppercase mt-1">Производство с 2016 года</span>
             </div>
+            
+            <div class="hidden md:flex items-center space-x-8 font-semibold text-sm">
+                <a href="#catalog" class="hover:text-green-700 transition">Прайс-лист</a>
+                <a href="#gallery" class="hover:text-green-700 transition">Наши работы</a>
+                <a href="#quiz" class="hover:text-green-700 transition">Расчет стоимости</a>
+            </div>
+
             <div class="flex flex-col items-end">
                 <a href="tel:+79219005441" class="text-lg font-bold hover:text-green-700 transition">+7 (921) 900-54-41</a>
                 <span class="text-[10px] text-green-600 flex items-center font-bold">
@@ -49,60 +56,99 @@
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Каталог бань-бочек</h2>
             
-            <div class="relative">
+            <div class="relative group">
+                <button onclick="scrollCarousel('catalog-slider', -1)" class="absolute -left-5 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg border border-stone-200 hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button onclick="scrollCarousel('catalog-slider', 1)" class="absolute -right-5 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg border border-stone-200 hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+
                 <div id="catalog-slider" class="flex overflow-x-auto gap-6 snap-x snap-mandatory hide-scrollbar pb-8 pt-4 px-4 -mx-4">
-                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm">
+                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm hover:-translate-y-2 transition-transform">
                         <img src="img/1_result.webp" class="w-full h-48 object-contain mb-4">
-                        <h3 class="font-bold text-lg mb-2">Баня-бочка 2.5м</h3>
+                        <h3 class="font-bold text-lg mb-4">Баня-бочка 2.5м</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Вместимость:</span> <span>2-4 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Отделений:</span> <span>1</span></div>
+                        </div>
                         <p class="text-green-700 font-extrabold text-xl mb-4">155 200 ₽</p>
                         <button onclick="openModal('Баня 2.5м', '155 200 ₽')" class="w-full py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Выбрать</button>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm">
+                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm hover:-translate-y-2 transition-transform">
                         <img src="img/2_result.webp" class="w-full h-48 object-contain mb-4">
-                        <h3 class="font-bold text-lg mb-2">Баня-бочка 3.5м</h3>
+                        <h3 class="font-bold text-lg mb-4">Баня-бочка 3.5м</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Вместимость:</span> <span>3-5 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Отделений:</span> <span>2</span></div>
+                        </div>
                         <p class="text-green-700 font-extrabold text-xl mb-4">175 800 ₽</p>
                         <button onclick="openModal('Баня 3.5м', '175 800 ₽')" class="w-full py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Выбрать</button>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm">
+                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm hover:-translate-y-2 transition-transform">
                         <img src="img/3_result.webp" class="w-full h-48 object-contain mb-4">
-                        <h3 class="font-bold text-lg mb-2">Баня-бочка 4м</h3>
+                        <h3 class="font-bold text-lg mb-4">Баня-бочка 4м</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Вместимость:</span> <span>4-6 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Отделений:</span> <span>2</span></div>
+                        </div>
                         <p class="text-green-700 font-extrabold text-xl mb-4">187 500 ₽</p>
                         <button onclick="openModal('Баня 4м', '187 500 ₽')" class="w-full py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Выбрать</button>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm">
+                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm hover:-translate-y-2 transition-transform">
                         <img src="img/4_result.webp" class="w-full h-48 object-contain mb-4">
-                        <h3 class="font-bold text-lg mb-2">Баня-бочка 4.5м</h3>
+                        <h3 class="font-bold text-lg mb-4">Баня-бочка 4.5м</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Вместимость:</span> <span>4-6 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Отделений:</span> <span>2</span></div>
+                        </div>
                         <p class="text-green-700 font-extrabold text-xl mb-4">196 500 ₽</p>
                         <button onclick="openModal('Баня 4.5м', '196 500 ₽')" class="w-full py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Выбрать</button>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm">
+                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm hover:-translate-y-2 transition-transform">
                         <img src="img/5_result.webp" class="w-full h-48 object-contain mb-4">
-                        <h3 class="font-bold text-lg mb-2">4.5м (бок. вход)</h3>
+                        <h3 class="font-bold text-lg mb-4">4.5м (бок. вход)</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Вместимость:</span> <span>5-6 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Отделений:</span> <span>2</span></div>
+                        </div>
                         <p class="text-green-700 font-extrabold text-xl mb-4">218 250 ₽</p>
                         <button onclick="openModal('Баня 4.5м боковой', '218 250 ₽')" class="w-full py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Выбрать</button>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm">
+                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm hover:-translate-y-2 transition-transform">
                         <img src="img/6_result.webp" class="w-full h-48 object-contain mb-4">
-                        <h3 class="font-bold text-lg mb-2">5м (бок. вход)</h3>
+                        <h3 class="font-bold text-lg mb-4">5м (бок. вход)</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Вместимость:</span> <span>6-8 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Отделений:</span> <span>3</span></div>
+                        </div>
                         <p class="text-green-700 font-extrabold text-xl mb-4">244 320 ₽</p>
                         <button onclick="openModal('Баня 5м боковой', '244 320 ₽')" class="w-full py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Выбрать</button>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm">
+                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm hover:-translate-y-2 transition-transform">
                         <img src="img/7_result.webp" class="w-full h-48 object-contain mb-4">
-                        <h3 class="font-bold text-lg mb-2">5.5м (бок. вход)</h3>
+                        <h3 class="font-bold text-lg mb-4">5.5м (бок. вход)</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Вместимость:</span> <span>7-9 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Отделений:</span> <span>3</span></div>
+                        </div>
                         <p class="text-green-700 font-extrabold text-xl mb-4">268 600 ₽</p>
                         <button onclick="openModal('Баня 5.5м боковой', '268 600 ₽')" class="w-full py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Выбрать</button>
                     </div>
 
-                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm">
+                    <div class="snap-center shrink-0 w-[280px] md:w-[320px] bg-stone-50 rounded-3xl p-6 border border-stone-100 flex flex-col shadow-sm hover:-translate-y-2 transition-transform">
                         <img src="img/7_result.webp" class="w-full h-48 object-contain mb-4">
-                        <h3 class="font-bold text-lg mb-2">6м (бок. вход)</h3>
+                        <h3 class="font-bold text-lg mb-4">6м (бок. вход)</h3>
+                        <div class="space-y-1 mb-6 text-sm text-stone-500 font-medium flex-grow">
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Вместимость:</span> <span>8-10 чел.</span></div>
+                            <div class="flex justify-between border-b border-stone-200 pb-1"><span>Отделений:</span> <span>3</span></div>
+                        </div>
                         <p class="text-green-700 font-extrabold text-xl mb-4">289 600 ₽</p>
                         <button onclick="openModal('Баня 6м боковой', '289 600 ₽')" class="w-full py-3 bg-stone-900 text-white rounded-xl font-bold hover:bg-stone-800 transition">Выбрать</button>
                     </div>
@@ -112,8 +158,16 @@
     </section>
 
     <section id="gallery" class="py-24 bg-stone-50">
-        <div class="max-w-7xl mx-auto px-4 text-center">
+        <div class="max-w-7xl mx-auto px-4 text-center relative group">
             <h2 class="text-3xl md:text-4xl font-bold mb-12">Наши работы</h2>
+            
+            <button onclick="scrollCarousel('gallery-slider', -1)" class="absolute -left-5 top-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg border border-stone-200 hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button onclick="scrollCarousel('gallery-slider', 1)" class="absolute -right-5 top-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg border border-stone-200 hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+
             <div id="gallery-slider" class="flex overflow-x-auto gap-4 snap-x snap-mandatory hide-scrollbar pb-8 px-4 -mx-4">
                 <div id="gallery-photos" class="contents"></div>
             </div>
@@ -132,44 +186,55 @@
                     <div id="step-1" class="quiz-step space-y-6">
                         <p class="font-bold text-xl md:text-2xl">Какая модель интересует?</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <label class="cursor-pointer"><input type="radio" name="form" value="Классическая" class="hidden peer" onchange="enableNextBtn(1)"><div class="p-5 border-2 border-stone-200 rounded-xl peer-checked:border-green-600 peer-checked:bg-green-50 font-bold">Классическая</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="form" value="Боковой вход" class="hidden peer" onchange="enableNextBtn(1)"><div class="p-5 border-2 border-stone-200 rounded-xl peer-checked:border-green-600 peer-checked:bg-green-50 font-bold">Боковой вход</div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="form" value="Классическая" class="hidden peer" onchange="handleModelChange('classic')"><div class="p-5 border-2 border-stone-200 rounded-xl peer-checked:border-green-600 peer-checked:bg-green-50 transition-all"><span class="font-bold block">Классическая</span><span class="text-xs text-stone-500">Вход с торца</span></div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="form" value="Боковой вход" class="hidden peer" onchange="handleModelChange('side')"><div class="p-5 border-2 border-stone-200 rounded-xl peer-checked:border-green-600 peer-checked:bg-green-50 transition-all"><span class="font-bold block">Боковой вход</span><span class="text-xs text-stone-500">Доступно от 4.5 метров</span></div></label>
                         </div>
-                        <button id="btn-next-1" disabled onclick="nextStep(1)" class="w-full py-4 bg-stone-300 text-stone-500 rounded-xl font-bold mt-8">Далее →</button>
+                        <button id="btn-next-1" disabled onclick="nextStep(1)" class="w-full py-4 bg-stone-300 text-stone-500 rounded-xl font-bold mt-8 transition-all">Далее →</button>
                     </div>
 
                     <div id="step-2" class="quiz-step hidden space-y-6">
                         <p class="font-bold text-xl md:text-2xl">Выберите длину</p>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                            <label class="cursor-pointer"><input type="radio" name="length" value="2.5м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">2.5м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="3.5м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">3.5м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="4м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">4м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="4.5м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">4.5м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="5.5м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">5.5м</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="length" value="6м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">6м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="2.5"><input type="radio" name="length" value="2.5м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">2.5м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="3.5"><input type="radio" name="length" value="3.5м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">3.5м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="4.0"><input type="radio" name="length" value="4м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">4м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="4.5"><input type="radio" name="length" value="4.5м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">4.5м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="5.5"><input type="radio" name="length" value="5.5м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">5.5м</div></label>
+                            <label class="cursor-pointer length-opt" data-size="6.0"><input type="radio" name="length" value="6м" class="hidden peer" onchange="enableNextBtn(2)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">6м</div></label>
                         </div>
-                        <button id="btn-next-2" disabled onclick="nextStep(2)" class="w-full py-4 bg-stone-300 text-stone-500 rounded-xl font-bold">Далее →</button>
+                        <div class="flex gap-4">
+                            <button onclick="prevStep(2)" class="w-1/3 py-4 bg-stone-200 hover:bg-stone-300 text-stone-600 rounded-xl font-bold">← Назад</button>
+                            <button id="btn-next-2" disabled onclick="nextStep(2)" class="w-2/3 py-4 bg-stone-300 text-stone-500 rounded-xl font-bold transition-all">Далее →</button>
+                        </div>
                     </div>
 
                     <div id="step-3" class="quiz-step hidden space-y-6">
                         <p class="font-bold text-xl md:text-2xl">Тип печи</p>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <label class="cursor-pointer"><input type="radio" name="stove" value="Дровяная" class="hidden peer" onchange="enableNextBtn(3)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">Дровяная</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="stove" value="Электро" class="hidden peer" onchange="enableNextBtn(3)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">Электро</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="stove" value="Своя" class="hidden peer" onchange="enableNextBtn(3)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold">Своя</div></label>
+                            <label class="cursor-pointer"><input type="radio" name="stove" value="Дровяная" class="hidden peer" onchange="enableNextBtn(3)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">Дровяная</div></label>
+                            <label class="cursor-pointer"><input type="radio" name="stove" value="Электро" class="hidden peer" onchange="enableNextBtn(3)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">Электро</div></label>
+                            <label class="cursor-pointer"><input type="radio" name="stove" value="Своя" class="hidden peer" onchange="enableNextBtn(3)"><div class="p-4 border-2 border-stone-200 rounded-xl text-center peer-checked:border-green-600 font-bold transition-all">Своя</div></label>
                         </div>
-                        <button id="btn-next-3" disabled onclick="nextStep(3)" class="w-full py-4 bg-stone-300 text-stone-500 rounded-xl font-bold">Далее →</button>
+                        <div class="flex gap-4">
+                            <button onclick="prevStep(3)" class="w-1/3 py-4 bg-stone-200 hover:bg-stone-300 text-stone-600 rounded-xl font-bold">← Назад</button>
+                            <button id="btn-next-3" disabled onclick="nextStep(3)" class="w-2/3 py-4 bg-stone-300 text-stone-500 rounded-xl font-bold transition-all">Далее →</button>
+                        </div>
                     </div>
 
                     <div id="step-4" class="quiz-step hidden space-y-6">
-                        <p class="font-bold text-xl md:text-2xl">Ваши контакты</p>
-                        <input type="text" id="clientName" placeholder="Имя" class="w-full p-4 border-2 border-stone-100 rounded-xl outline-none focus:border-green-500">
-                        <input type="tel" id="clientPhone" placeholder="Телефон" class="w-full p-4 border-2 border-stone-100 rounded-xl outline-none focus:border-green-500">
-                        <button onclick="submitQuiz()" class="w-full py-4 bg-green-600 text-white rounded-xl font-bold shadow-lg mt-4">Отправить</button>
+                        <p class="font-bold text-xl md:text-2xl">Куда прислать расчет?</p>
+                        <input type="text" id="clientName" placeholder="Ваше имя" class="w-full p-4 border-2 border-stone-200 rounded-xl outline-none focus:border-green-500">
+                        <input type="tel" id="clientPhone" placeholder="Телефон (например, 89991234567)" class="w-full p-4 border-2 border-stone-200 rounded-xl outline-none focus:border-green-500">
+                        <div class="flex gap-4 mt-4">
+                            <button onclick="prevStep(4)" class="w-1/3 py-4 bg-stone-200 hover:bg-stone-300 text-stone-600 rounded-xl font-bold">← Назад</button>
+                            <button onclick="submitQuiz()" class="w-2/3 py-4 bg-green-600 text-white rounded-xl font-bold shadow-lg hover:bg-green-500 transition-all">Отправить</button>
+                        </div>
                     </div>
 
-                    <div id="step-success" class="quiz-step hidden text-center py-10">
-                        <h3 class="text-2xl font-bold text-green-600">✓ Заявка отправлена!</h3>
+                    <div id="step-success" class="quiz-step hidden text-center py-10 space-y-4">
+                        <div class="text-green-500 text-6xl mx-auto">✓</div>
+                        <h3 class="text-2xl font-bold text-stone-900">Заявка отправлена!</h3>
+                        <p class="text-stone-500">Свяжемся с вами в течение 10 минут.</p>
                     </div>
                 </div>
             </div>
@@ -177,15 +242,29 @@
     </section>
 
     <div id="lead-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900/80 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white w-full max-w-md m-4 p-8 rounded-3xl relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-stone-400">✕</button>
-            <h3 class="text-2xl font-bold mb-2">Заказать баню</h3>
-            <p id="modal-product-name" class="text-green-600 font-bold mb-6"></p>
-            <input type="text" id="modalName" placeholder="Имя" class="w-full p-4 border-2 border-stone-100 rounded-xl mb-4 outline-none">
-            <input type="tel" id="modalPhone" placeholder="Телефон" class="w-full p-4 border-2 border-stone-100 rounded-xl mb-6 outline-none">
-            <button onclick="submitModalLead()" class="w-full py-4 bg-green-600 text-white rounded-xl font-bold">Отправить</button>
+        <div class="bg-white w-full max-w-md m-4 p-8 rounded-3xl relative overflow-hidden">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-900 z-10">✕</button>
+            
+            <div id="modal-form-content">
+                <h3 class="text-2xl font-bold mb-2">Заказать баню</h3>
+                <p id="modal-product-name" class="text-green-600 font-bold mb-6"></p>
+                <input type="text" id="modalName" placeholder="Ваше имя" class="w-full p-4 border-2 border-stone-100 rounded-xl mb-4 outline-none focus:border-green-500">
+                <input type="tel" id="modalPhone" placeholder="Телефон (мин. 10 цифр)" class="w-full p-4 border-2 border-stone-100 rounded-xl mb-6 outline-none focus:border-green-500">
+                <button onclick="submitModalLead()" class="w-full py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-500 transition-all shadow-lg">Отправить</button>
+            </div>
+
+            <div id="modal-success-content" class="hidden text-center py-8 space-y-4">
+                <div class="text-green-500 text-6xl mx-auto">✓</div>
+                <h3 class="text-2xl font-bold text-stone-900">Заявка отправлена!</h3>
+                <p class="text-stone-500">Мы скоро вам позвоним.</p>
+            </div>
         </div>
     </div>
+
+    <footer class="py-12 bg-stone-900 text-stone-400 text-center border-t border-stone-800">
+        <p class="text-white font-bold uppercase tracking-tight">ИП Лащевский Александр Максимович</p>
+        <p class="text-[10px] mt-1">ИНН: 780000000000 | ОГРНИП: 324784700000000</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
