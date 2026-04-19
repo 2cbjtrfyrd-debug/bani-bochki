@@ -7,77 +7,88 @@ function enableNextBtn(stepIndex) {
     }
 }
 
+// Новая логика: блокировка размеров при выборе бокового входа
+function handleModelChange(type) {
+    const lengthOptions = document.querySelectorAll('.length-opt');
+    const lengthRadios = document.querySelectorAll('input[name="length"]');
+    
+    // Сбрасываем выбор размера при смене типа бани
+    lengthRadios.forEach(radio => radio.checked = false);
+    document.getElementById('btn-next-2').disabled = true;
+    document.getElementById('btn-next-2').classList.replace('bg-stone-900', 'bg-stone-300');
+
+    lengthOptions.forEach(opt => {
+        const size = parseFloat(opt.getAttribute('data-size'));
+        const radio = opt.querySelector('input');
+
+        if (type === 'side' && size < 4.5) {
+            opt.classList.add('opacity-30', 'pointer-events-none', 'grayscale');
+            radio.disabled = true;
+        } else {
+            opt.classList.remove('opacity-30', 'pointer-events-none', 'grayscale');
+            radio.disabled = false;
+        }
+    });
+
+    enableNextBtn(1);
+}
+
 function nextStep(currentStep) {
-    const currentDiv = document.getElementById(`step-${currentStep}`);
-    currentDiv.classList.add('opacity-0', 'pointer-events-none');
+    document.getElementById(`step-${currentStep}`).classList.add('opacity-0', 'pointer-events-none');
     const nextStepNum = currentStep + 1;
-    const nextDiv = document.getElementById(`step-${nextStepNum}`);
-    nextDiv.classList.remove('opacity-0', 'pointer-events-none');
+    document.getElementById(`step-${nextStepNum}`).classList.remove('opacity-0', 'pointer-events-none');
     updateProgress(nextStepNum);
 }
 
 function prevStep(currentStep) {
-    const currentDiv = document.getElementById(`step-${currentStep}`);
-    currentDiv.classList.add('opacity-0', 'pointer-events-none');
+    document.getElementById(`step-${currentStep}`).classList.add('opacity-0', 'pointer-events-none');
     const prevStepNum = currentStep - 1;
-    const prevDiv = document.getElementById(`step-${prevStepNum}`);
-    prevDiv.classList.remove('opacity-0', 'pointer-events-none');
+    document.getElementById(`step-${prevStepNum}`).classList.remove('opacity-0', 'pointer-events-none');
     updateProgress(prevStepNum);
 }
 
 function updateProgress(step) {
-    const progressBar = document.getElementById('progress-bar');
-    const stepCounter = document.getElementById('step-counter');
-    if (step <= 4) {
-        stepCounter.innerText = `Шаг ${step} из 4`;
-        progressBar.style.width = `${(step / 4) * 100}%`;
-    }
+    document.getElementById('step-counter').innerText = `Шаг ${step} из 4`;
+    document.getElementById('progress-bar').style.width = `${(step / 4) * 100}%`;
 }
 
 function submitQuiz() {
     const name = document.getElementById('clientName').value;
     const phone = document.getElementById('clientPhone').value;
-    if (phone.length < 5) {
-        alert("Пожалуйста, введите корректный номер телефона");
-        return;
-    }
-    const form = document.querySelector('input[name="form"]:checked')?.value || "Не выбрано";
-    const length = document.querySelector('input[name="length"]:checked')?.value || "Не выбрано";
-    const stove = document.querySelector('input[name="stove"]:checked')?.value || "Не выбрано";
-    const message = `🔥 *Новая заявка с сайта!*\n\n*Имя:* ${name}\n*Телефон:* ${phone}\n\n*Ответы из квиза:*\n🪵 Модель: ${form}\n📏 Размер: ${length}\n🔥 Печь: ${stove}`;
+    if (phone.length < 5) { alert("Введите номер телефона"); return; }
+    
+    const form = document.querySelector('input[name="form"]:checked')?.value || "-";
+    const length = document.querySelector('input[name="length"]:checked')?.value || "-";
+    const stove = document.querySelector('input[name="stove"]:checked')?.value || "-";
+    
+    const message = `🔥 *Новая заявка!*\n\n*Имя:* ${name}\n*Телефон:* ${phone}\n\n*Ответы:*\n🪵 Модель: ${form}\n📏 Размер: ${length}\n🔥 Печь: ${stove}`;
     
     fetch('/api/send-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: message })
-    })
-    .then(response => {
-        if (response.ok) {
-            document.getElementById(`step-4`).classList.add('opacity-0', 'pointer-events-none');
+    }).then(r => {
+        if (r.ok) {
+            document.getElementById('step-4').classList.add('opacity-0', 'pointer-events-none');
             document.getElementById('step-success').classList.remove('opacity-0', 'pointer-events-none');
             document.getElementById('step-counter').innerText = "Готово!";
-            document.getElementById('progress-bar').style.width = "100%";
-        } else {
-            alert("Ошибка при отправке заявки.");
         }
     });
 }
 
 function scrollCarousel(containerId, direction) {
-    const container = document.getElementById(containerId);
-    if(container) container.scrollBy({ left: direction * 350, behavior: 'smooth' });
+    document.getElementById(containerId).scrollBy({ left: direction * 350, behavior: 'smooth' });
 }
 
-// ГЕНЕРАЦИЯ ГАЛЕРЕИ (Начиная с 8 фото)
 document.addEventListener("DOMContentLoaded", () => {
     const galleryContainer = document.getElementById('gallery-photos');
     if (galleryContainer) {
         let photosHTML = '';
-        // В папке 27 файлов. Каталог забрал 1-7. Значит галерея с 8 по 27.
+        // Галерея начинается с 8 фото (1-7 в каталоге)
         for (let i = 8; i <= 27; i++) {
             photosHTML += `
                 <div class="snap-center shrink-0 w-[280px] h-[350px] md:w-[320px] md:h-[400px] rounded-2xl overflow-hidden shadow-md">
-                    <img src="img/${i}_result.webp" alt="Пример работы ${i}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer">
+                    <img src="img/${i}_result.webp" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
                 </div>
             `;
         }
